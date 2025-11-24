@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ethan Pairitz - Engineering Portfolio</title>
+    <title>Ethan Pairitz - Portfolio</title>
     <style>
         * {
             margin: 0;
@@ -12,38 +12,59 @@
         }
 
         :root {
-            --primary-color: #2563eb;
-            --secondary-color: #1e40af;
-            --accent-color: #3730a3;
-            --text-dark: #1f2937;
-            --text-light: #6b7280;
-            --bg-light: #f9fafb;
-            --bg-white: #ffffff;
-            --border-color: #e5e7eb;
-            --success-color: #10b981;
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #8b5cf6;
+            --accent: #ec4899;
+            --dark: #0f172a;
+            --gray: #64748b;
+            --light-gray: #e2e8f0;
+            --white: #ffffff;
+            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
             line-height: 1.6;
-            color: var(--text-dark);
-            background-color: var(--bg-light);
+            color: var(--dark);
+            background: var(--white);
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(45deg, #f3f4f6 25%, transparent 25%), 
+                        linear-gradient(-45deg, #f3f4f6 25%, transparent 25%), 
+                        linear-gradient(45deg, transparent 75%, #f3f4f6 75%), 
+                        linear-gradient(-45deg, transparent 75%, #f3f4f6 75%);
+            background-size: 50px 50px;
+            background-position: 0 0, 0 25px, 25px -25px, -25px 0px;
+            opacity: 0.03;
         }
 
         /* Navigation */
         nav {
-            background-color: var(--bg-white);
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
+            transition: all 0.3s ease;
         }
 
         .nav-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 1rem 2rem;
+            padding: 1.2rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -52,25 +73,43 @@
         .nav-brand {
             font-size: 1.5rem;
             font-weight: 700;
-            color: var(--primary-color);
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             text-decoration: none;
         }
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 2.5rem;
             list-style: none;
         }
 
         .nav-links a {
-            color: var(--text-dark);
+            color: var(--dark);
             text-decoration: none;
             font-weight: 500;
+            position: relative;
             transition: color 0.3s ease;
         }
 
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
         .nav-links a:hover {
-            color: var(--primary-color);
+            color: var(--primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
         }
 
         /* Mobile Menu */
@@ -86,80 +125,70 @@
             display: block;
             width: 25px;
             height: 3px;
-            background-color: var(--text-dark);
+            background: var(--dark);
             margin: 5px 0;
             transition: 0.3s;
-        }
-
-        /* Main Content */
-        main {
-            margin-top: 4rem;
-            min-height: calc(100vh - 4rem);
-        }
-
-        .section {
-            padding: 4rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section:nth-child(even) {
-            background-color: var(--bg-white);
-        }
-
-        h1, h2, h3 {
-            color: var(--text-dark);
-            margin-bottom: 1rem;
-        }
-
-        h1 {
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-        }
-
-        h2 {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            position: relative;
-            padding-bottom: 0.5rem;
-        }
-
-        h2:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50px;
-            height: 4px;
-            background-color: var(--primary-color);
-        }
-
-        p {
-            margin-bottom: 1rem;
-            line-height: 1.8;
-            color: var(--text-light);
+            border-radius: 3px;
         }
 
         /* Hero Section */
         .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: var(--white);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+            opacity: 0.05;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(-100px, -100px) rotate(120deg); }
+            66% { transform: translate(100px, -100px) rotate(240deg); }
+        }
+
+        .hero-content {
             text-align: center;
-            padding: 6rem 2rem;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
-            color: white;
+            z-index: 1;
+            max-width: 800px;
+            padding: 2rem;
         }
 
         .hero h1 {
-            color: white;
-            font-size: 3.5rem;
-            margin-bottom: 0.5rem;
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInUp 0.8s ease;
         }
 
         .hero .tagline {
             font-size: 1.5rem;
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 2rem;
+            color: var(--gray);
+            margin-bottom: 1rem;
+            animation: fadeInUp 0.8s ease 0.2s backwards;
+        }
+
+        .hero .subtitle {
+            font-size: 1.1rem;
+            color: var(--gray);
+            margin-bottom: 3rem;
+            animation: fadeInUp 0.8s ease 0.4s backwards;
         }
 
         .hero-links {
@@ -167,116 +196,234 @@
             gap: 1rem;
             justify-content: center;
             flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease 0.6s backwards;
         }
 
-        .hero-links a {
-            color: white;
+        .btn {
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
             text-decoration: none;
-            padding: 0.75rem 1.5rem;
-            border: 2px solid white;
-            border-radius: 0.5rem;
+            font-weight: 600;
             transition: all 0.3s ease;
-            font-weight: 500;
+            display: inline-block;
         }
 
-        .hero-links a:hover {
-            background-color: white;
-            color: var(--primary-color);
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+            box-shadow: 0 5px 20px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Sections */
+        .section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+        }
+
+        h2 span {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         /* Cards */
         .card {
-            background-color: var(--bg-white);
-            border-radius: 0.5rem;
-            padding: 2rem;
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
             margin-bottom: 2rem;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--gradient);
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
         .card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
         }
 
-        .card h3 {
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-        }
-
-        .card .meta {
-            color: var(--text-light);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
+        .card:hover::before {
+            opacity: 1;
         }
 
         /* Skills Grid */
-        .skills-grid {
+        .skills-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
-            margin-top: 2rem;
         }
 
-        .skill-category h4 {
-            color: var(--primary-color);
+        .skill-card {
+            background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid var(--light-gray);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary);
+        }
+
+        .skill-icon {
+            font-size: 3rem;
             margin-bottom: 1rem;
         }
 
-        .skill-list {
-            list-style: none;
+        .skill-card h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
         }
 
-        .skill-list li {
-            padding: 0.5rem 0;
+        /* Certifications */
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .cert-card {
+            background: white;
+            border: 2px solid var(--light-gray);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
             position: relative;
-            padding-left: 1.5rem;
+            overflow: hidden;
         }
 
-        .skill-list li:before {
-            content: '▸';
+        .cert-card::after {
+            content: '';
             position: absolute;
-            left: 0;
-            color: var(--primary-color);
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: var(--gradient);
+            opacity: 0.1;
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
         }
 
-        /* Projects */
-        .project-link {
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: 500;
+        .cert-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.2);
         }
 
-        .project-link:hover {
-            text-decoration: underline;
+        .cert-card:hover::after {
+            top: -75%;
+            right: -75%;
         }
 
-        /* Ethics Section */
-        .ethics-content {
-            background-color: var(--bg-white);
-            padding: 3rem;
-            border-radius: 0.5rem;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            max-width: 800px;
-            margin: 0 auto;
+        .cert-company {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
         }
 
-        .ethics-content h3 {
-            color: var(--primary-color);
-            margin-top: 2rem;
+        .cert-list {
+            list-style: none;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cert-list li {
+            padding: 0.5rem 0;
+            color: var(--gray);
+        }
+
+        /* Project Cards */
+        .project-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
             margin-bottom: 1rem;
         }
 
-        .ethics-content p {
-            text-align: justify;
+        .project-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
         }
 
         /* Footer */
         footer {
-            background-color: var(--text-dark);
+            background: var(--dark);
             color: white;
             text-align: center;
-            padding: 2rem;
+            padding: 3rem 2rem;
+            margin-top: 5rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
         }
 
         /* Responsive */
@@ -287,10 +434,10 @@
                 top: 100%;
                 left: 0;
                 width: 100%;
-                background-color: var(--bg-white);
+                background: white;
                 flex-direction: column;
-                padding: 1rem 2rem;
-                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                padding: 2rem;
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
             }
 
             .nav-links.active {
@@ -301,58 +448,47 @@
                 display: block;
             }
 
-            h1 {
-                font-size: 2rem;
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2rem; }
+            .hero h1 { font-size: 3rem; }
+            
+            .hero-links {
+                flex-direction: column;
+                align-items: center;
             }
 
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero .tagline {
-                font-size: 1.2rem;
-            }
-
-            .skills-grid {
+            .cert-grid {
                 grid-template-columns: 1fr;
             }
         }
 
-        /* Animations */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
         }
 
-        .fade-in {
-            animation: fadeIn 0.6s ease-out;
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
         }
 
-        /* Resume Button */
-        .resume-button {
-            display: inline-block;
-            background-color: var(--primary-color);
-            color: white;
-            padding: 1rem 2rem;
-            text-decoration: none;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            transition: background-color 0.3s ease;
-            margin-top: 1rem;
+        ::-webkit-scrollbar-track {
+            background: var(--light-gray);
         }
 
-        .resume-button:hover {
-            background-color: var(--secondary-color);
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-dark);
         }
     </style>
 </head>
 <body>
+    <div class="bg-animation"></div>
+
     <!-- Navigation -->
     <nav>
         <div class="nav-container">
@@ -363,214 +499,237 @@
                 <span></span>
             </button>
             <ul class="nav-links" id="navLinks">
-                <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#projects">Projects</a></li>
-                <li><a href="#experience">Experience</a></li>
                 <li><a href="#skills">Skills</a></li>
-                <li><a href="#ethics">Ethics</a></li>
-                <li><a href="#resume">Resume</a></li>
+                <li><a href="#certifications">Certifications</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#mission">Mission</a></li>
             </ul>
         </div>
     </nav>
 
-    <main>
-        <!-- Hero Section -->
-        <section id="home" class="hero">
-            <h1 class="fade-in">Ethan Pairitz</h1>
-            <p class="tagline fade-in">Intelligent Systems Engineering Student</p>
-            <div class="hero-links fade-in">
-                <a href="mailto:ethan.op@icloud.com">Email</a>
-                <a href="mailto:epairitz@iu.edu">IU Email</a>
-                <a href="https://github.com/ethndotcom/I-clicked-some-keys" target="_blank">GitHub</a>
-                <a href="tel:574-333-5423">Call</a>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Ethan Pairitz</h1>
+            <p class="tagline">Informatics Major</p>
+            <p class="subtitle">Dual Minor in Intelligent Systems Engineering & Business<br>Luddy School of Informatics, Computing, and Engineering</p>
+            <div class="hero-links">
+                <a href="mailto:ethan.op@icloud.com" class="btn btn-primary">Get in Touch</a>
+                <a href="https://github.com/ethndotcom/I-clicked-some-keys" target="_blank" class="btn btn-outline">GitHub</a>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- About Section -->
-        <section id="about" class="section">
-            <h2>About Me</h2>
-            <div class="fade-in">
-                <p>Engineering has always been something I've known I've wanted in one way or another. My mom likes to tell the story of how in 2nd grade she came in to the school and we had this aspiration type wall and everyone else had astronaut, firefighter, doctor, the usual things you'd see but then there was mine, saying engineer. Understanding the way things work inside and out just became a quick passion, playing with legos and joining a lego robotics team while I was in grade school, playing Minecraft and messing around with redstone creations, I just knew what I wanted.</p>
-                
-                <p>Fast forward some years and I was in the PLTW engineering course gearing up for college, creating elevator systems, renewable energy systems, just getting to building and coding. This was also around the same time I was getting into building custom computers and custom keyboards.</p>
-                
-                <p>Then it came time for the college search, I was looking at computer science and computer engineering programs at many different colleges and actually originally when I applied to IU I was a CS major, when I heard about ISE I knew it was everything I had been working towards, it was this blend of CE, CS, AI, etc. It was one of those opportunities that I looked at and knew I couldn't pass up on.</p>
-                
-                <p>As I look forward towards my career goals, The E229: Engineering Professionalization & Ethics class at IU really shaped a new way of implementing the things I've been working on. I really want to go into technology consulting/managing, the class taught me the importance of balancing innovation and ethics, something I just latched onto really heavily and would love to continue to implement. Engineering will always be a huge part of me as its been my whole life essentially and finding new paths and following them is something that I have been well taught and has only lead me to great opportunities.</p>
-            </div>
-        </section>
-
-        <!-- Projects Section -->
-        <section id="projects" class="section">
-            <h2>Engineering Projects</h2>
+    <!-- About Section -->
+    <section id="about" class="section">
+        <h2>About <span>Me</span></h2>
+        <div class="card fade-in">
+            <p>Technology has always caught my attention. I've always been the kind of person who wants to know how things work, why something behaves a certain way, and how small changes can make a real difference. That curiosity has followed me my whole life, and it's a big part of who I am.</p>
             
-            <div class="card fade-in">
-                <h3>Educational Programming Games Series</h3>
-                <p class="meta">C, Python, Java | Teaching Tools</p>
-                <p><strong>Challenge:</strong> Many beginners struggle with learning programming syntax and concepts in traditional environments. I wanted to create an engaging, gamified approach to teaching programming fundamentals.</p>
-                <p><strong>Solution:</strong> Developed three language-specific games (C-Be-Good, Python-Be-Good, Java-Be-Good) inspired by vim-be-good. Each game teaches syntax and programming concepts through interactive challenges and immediate feedback.</p>
-                <p><strong>Technologies:</strong> C, Python, Java, Terminal-based UI, Game mechanics</p>
-                <p><strong>Outcome:</strong> Tested with diverse users from experienced programmers to complete beginners. Received positive feedback on the engaging learning approach and valuable suggestions for improvements. The games successfully help users build muscle memory for programming syntax while making the learning process enjoyable.</p>
-                <p><a href="https://github.com/ethndotcom/I-clicked-some-keys/tree/main/games" target="_blank" class="project-link">View on GitHub →</a></p>
-            </div>
-
-            <div class="card fade-in">
-                <h3>PLTW Engineering Projects</h3>
-                <p class="meta">Systems Design | High School</p>
-                <p><strong>Elevator Control System:</strong> Designed and programmed a multi-floor elevator control system focusing on efficiency and safety protocols. Implemented queue management algorithms to minimize wait times and energy consumption.</p>
-                <p><strong>Renewable Energy System:</strong> Developed a solar panel optimization system that tracked sun position and adjusted panel angles for maximum energy collection. Included battery storage management and power distribution logic.</p>
-                <p><strong>Skills Applied:</strong> Systems thinking, control logic, sustainable design principles, and practical problem-solving.</p>
-            </div>
-        </section>
-
-        <!-- Experience Section -->
-        <section id="experience" class="section">
-            <h2>Professional Experience</h2>
+            <p>At Indiana University, I'm studying Informatics with minors in Intelligent Systems Engineering and Business. I like being in a space where I can look at technology from different sides. I enjoy understanding people, systems, and the small details that make something genuinely useful. I've always been good at taking something complicated and breaking it down until it finally makes sense.</p>
             
-            <div class="card fade-in">
-                <h3>IT Assistant</h3>
-                <p class="meta">Global Link IT Department | June 2022 - Present</p>
-                <p>Supporting IT operations in a professional environment, I've gained valuable experience in technical problem-solving and customer service. My responsibilities include:</p>
-                <ul>
-                    <li>Troubleshooting hardware and software issues for staff members</li>
-                    <li>Assisting with system maintenance and updates</li>
-                    <li>Providing technical support and training to end users</li>
-                </ul>
-                <p><strong>Skills Developed:</strong> Technical troubleshooting, professional communication, time management, and collaborative problem-solving in a business environment.</p>
-                <p><strong>Impact:</strong> Improved response time for IT tickets by implementing a systematic troubleshooting approach and creating documentation for common issues.</p>
-            </div>
-
-            <div class="card fade-in">
-                <h3>Volunteer Tennis Coach</h3>
-                <p class="meta">St. Joseph High School Tennis Camps | Summers during high school</p>
-                <p>Led youth tennis training sessions, teaching fundamental skills and game strategy to elementary and middle school students.</p>
-                <ul>
-                    <li>Developed age-appropriate training drills and activities</li>
-                    <li>Mentored young players on sportsmanship and teamwork</li>
-                    <li>Organized and supervised group activities and tournaments</li>
-                </ul>
-                <p><strong>Impact:</strong> Helped over 50 young players improve their tennis skills while fostering a love for the sport and physical activity.</p>
-            </div>
-
-            <div class="card fade-in">
-                <h3>Volunteer Assistant</h3>
-                <p class="meta">YMCA Aftercare Program | High School Years</p>
-                <p>Provided support and supervision for elementary school children in after-school programs.</p>
-                <ul>
-                    <li>Supervised children during activities and homework time</li>
-                    <li>Assisted special needs students with daily activities</li>
-                    <li>Organized educational games and recreational activities</li>
-                </ul>
-                <p><strong>Skills Developed:</strong> Patience, adaptability, inclusive communication, and the ability to work with diverse groups of children.</p>
-            </div>
-        </section>
-
-        <!-- Skills Section -->
-        <section id="skills" class="section">
-            <h2>Technical Skills</h2>
+            <p>I'm drawn to work that has purpose. I like helping people make sense of complex things and finding solutions that actually support them. I care about how technology impacts everyday life, and I try to approach things with a mindset that's practical, thoughtful, and focused on real value.</p>
             
-            <div class="skills-grid">
-                <div class="skill-category fade-in">
-                    <h4>Programming Languages</h4>
-                    <ul class="skill-list">
-                        <li>C - Systems programming</li>
-                        <li>Python - Data analysis & automation</li>
-                        <li>Java - Object-oriented development</li>
-                    </ul>
-                </div>
-                
-                <div class="skill-category fade-in">
-                    <h4>Engineering Tools</h4>
-                    <ul class="skill-list">
-                        <li>3D Modeling & CAD</li>
-                        <li>Git & GitHub</li>
-                        <li>Vim/Neovim</li>
-                        <li>Linux/Unix systems</li>
-                    </ul>
-                </div>
-                
-                <div class="skill-category fade-in">
-                    <h4>Hardware Skills</h4>
-                    <ul class="skill-list">
-                        <li>Custom PC building</li>
-                        <li>Mechanical keyboard assembly</li>
-                        <li>Hardware troubleshooting</li>
-                        <li>Component selection & optimization</li>
-                    </ul>
-                </div>
-                
-                <div class="skill-category fade-in">
-                    <h4>Soft Skills</h4>
-                    <ul class="skill-list">
-                        <li>Technical communication</li>
-                        <li>Team collaboration</li>
-                        <li>Problem-solving</li>
-                        <li>Project management</li>
-                    </ul>
+            <p>Outside of classes, I stay involved and keep myself growing. I'm steady, reliable, and I try to be someone people can count on. I like good conversations, good challenges, and environments where people push each other in a positive way.</p>
+            
+            <p>I'm at a point in my life where I'm focused on becoming the best version of myself. I want to build a life and career that let me keep learning, stay curious, and surround myself with people who aim higher. More than anything, I want to do work that feels meaningful and has a positive impact on the people around me. I'm still figuring out the exact path, but I know I'm moving in a direction that fits me, and I'm excited for what comes next.</p>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <h2>Featured <span>Projects</span></h2>
+        
+        <div class="card fade-in">
+            <div class="project-header">
+                <div class="project-icon">📱</div>
+                <div>
+                    <h3>ADHD/ADD Focus Management App</h3>
+                    <p class="meta">iOS Development | Apple Developer Program</p>
                 </div>
             </div>
+            <p><strong>Challenge:</strong> Students with ADHD/ADD often struggle with traditional time management and study tools that don't account for their unique focus patterns and needs.</p>
+            <p><strong>Solution:</strong> Developing a comprehensive iOS application that adapts to individual focus patterns, providing customized study sessions, break reminders, and task management specifically designed for ADHD/ADD users.</p>
+            <p><strong>Technologies:</strong> Swift, SwiftUI, Core Data, Apple HealthKit integration</p>
+            <p><strong>Status:</strong> Currently in development as part of the Apple Developer Program, with beta testing planned for early 2025.</p>
+        </div>
+
+        <div class="card fade-in">
+            <div class="project-header">
+                <div class="project-icon">🎮</div>
+                <div>
+                    <h3>Educational Programming Games Series</h3>
+                    <p class="meta">C, Python, Java | Open Source</p>
+                </div>
+            </div>
+            <p><strong>Challenge:</strong> Many beginners struggle with learning programming syntax and concepts in traditional environments.</p>
+            <p><strong>Solution:</strong> Developed three language-specific games (C-Be-Good, Python-Be-Good, Java-Be-Good) inspired by vim-be-good. Each game teaches syntax and programming concepts through interactive challenges.</p>
+            <p><strong>Impact:</strong> Tested with diverse users from experienced programmers to complete beginners, receiving positive feedback on engagement and learning outcomes.</p>
+            <p><a href="https://github.com/ethndotcom/I-clicked-some-keys/tree/main/games" target="_blank" style="color: var(--primary); font-weight: 600;">View on GitHub →</a></p>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section">
+        <h2>Technical <span>Skills</span></h2>
+        
+        <div class="skills-container fade-in">
+            <div class="skill-card">
+                <div class="skill-icon">💻</div>
+                <h4>Programming Languages</h4>
+                <p>Python • Java • C • HTML/CSS • Swift</p>
+            </div>
             
-            <div class="card fade-in" style="margin-top: 3rem;">
-                <h3>Career Development Plan</h3>
-                <p>My goal is to transition into technology consulting and management roles where I can leverage both my technical expertise and understanding of ethical engineering practices. To achieve this, I plan to:</p>
-                <ul>
-                    <li><strong>Short-term (1-2 years):</strong> Gain deeper expertise in AI/ML systems through ISE coursework, complete internships in consulting firms, and develop project management skills through student organizations.</li>
-                    <li><strong>Medium-term (3-5 years):</strong> Pursue certifications in project management (PMP) and Agile/Scrum methodologies. Build experience in client communication and stakeholder management through entry-level consulting positions.</li>
-                    <li><strong>Long-term (5+ years):</strong> Specialize in digital transformation consulting, focusing on ethical AI implementation and sustainable technology solutions. Consider pursuing an MBA to strengthen business acumen.</li>
+            <div class="skill-card">
+                <div class="skill-icon">🛠️</div>
+                <h4>Development Tools</h4>
+                <p>VS Code • Vim/Terminal • Git/GitHub • Xcode</p>
+            </div>
+            
+            <div class="skill-card">
+                <div class="skill-icon">🖥️</div>
+                <h4>Operating Systems</h4>
+                <p>macOS • Windows • Linux/Unix</p>
+            </div>
+            
+            <div class="skill-card">
+                <div class="skill-icon">📊</div>
+                <h4>Business Tools</h4>
+                <p>Microsoft Office Suite • Google Workspace • Data Analysis</p>
+            </div>
+            
+            <div class="skill-card">
+                <div class="skill-icon">🤝</div>
+                <h4>Soft Skills</h4>
+                <p>Project Management • Team Leadership • Strategic Communication</p>
+            </div>
+            
+            <div class="skill-card">
+                <div class="skill-icon">🎯</div>
+                <h4>Specializations</h4>
+                <p>Technology Consulting • Digital Strategy • Systems Design</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications" class="section">
+        <h2>Professional <span>Certifications</span></h2>
+        
+        <div class="cert-grid">
+            <div class="cert-card fade-in">
+                <h3 class="cert-company">BCG</h3>
+                <p style="color: var(--gray); margin-bottom: 1rem;">Boston Consulting Group</p>
+                <ul class="cert-list">
+                    <li>✓ Introduction to Strategy Consulting</li>
+                    <li>✓ Strategy Consulting</li>
+                    <li>✓ Social Impact</li>
                 </ul>
-                <p>Throughout this journey, I aim to maintain the balance between technical innovation and ethical responsibility that I've learned is crucial to being a successful engineer.</p>
             </div>
-        </section>
-
-        <!-- Ethics Section -->
-        <section id="ethics" class="section">
-            <h2>Engineering Ethics</h2>
             
-            <div class="ethics-content fade-in">
-                <p>Before taking this course, I always thought of engineering as being about problem-solving, numbers, and design, basically finding the most efficient way to make something work. But what I've learned is that engineering is also deeply human. Every decision an engineer makes affects someone or something, whether that's a community, the environment, or even future generations. Because of that, ethics isn't just a side topic; it's part of what it means to be a good engineer. It's what separates just doing the job from doing the right thing.</p>
-
-                <h3>The Role of Ethics in Engineering Practice</h3>
-                <p>I've come to understand that ethics in engineering is really about responsibility. As engineers, people rely on us to design things that are safe, fair, and sustainable. The public trusts us with that, and that trust is earned through consistent integrity and transparency. Engineering isn't just about what's possible, it's about what's acceptable. Just because something can be done doesn't automatically mean it should be.</p>
-
-                <p>I also learned that ethics is not always black and white. Real-world situations involve trade-offs, balancing cost, safety, environmental impact, and social outcomes. Ethical decision-making means looking beyond the technical side and thinking through those consequences. It's about having that awareness to stop and ask, Who does this impact? Who benefits? Who could be harmed? That mindset makes a huge difference in practice.</p>
-
-                <h3>Ethical Considerations in Decision-Making</h3>
-                <p>This course really emphasized how engineers deal with complex, overlapping factors. There's safety, which always comes first; environmental impact and sustainability, which make sure what we build doesn't hurt the planet; cost, which influences what's possible; and social and legal responsibilities, which ensure fairness and accountability. What stuck with me is that ethics isn't about choosing one over the other, but about finding balance in a way that still protects people and the environment.</p>
-
-                <p>For example, a company might design a cheaper product that cuts corners on safety. On paper, that might save money, but ethically, it fails the basic duty of protecting the public. Or consider a new technology that's efficient but produces harmful waste, it might look great in the short term, but sustainability says otherwise. Ethics forces engineers to think long-term, not just about efficiency or profit, but about the lasting effects of their work.</p>
-
-                <h3>Case Study: The Challenger Disaster</h3>
-                <p>One of the biggest lessons for me came from learning about the Challenger disaster. On the surface, it was a technical failure, an O-ring that cracked in the cold. But the deeper problem was ethical. Engineers at Morton Thiokol knew there were safety risks, yet management went forward with the launch because of schedule and political pressure. That single decision ended up costing seven lives.</p>
-
-                <p>This case made me realize that ethics isn't just about knowing what's right, it's about having the courage to act on it. It's easy to assume that speaking up will get you in trouble or that someone else will handle it, but the Challenger case proved how dangerous that mindset can be. Being an ethical engineer sometimes means being uncomfortable or standing alone. It means putting safety and honesty above deadlines, money, or reputation. That's something I'll carry with me moving forward.</p>
-
-                <h3>Modern Contexts: AI, Technology, and Sustainability</h3>
-                <p>As someone studying Intelligent Systems Engineering, I've also started thinking about how ethics applies to technology. AI and data systems can do incredible things, but they also raise big questions about bias, privacy, and accountability. Who's responsible when an algorithm makes a bad decision? How do we make sure these systems treat people fairly? Those are ethical challenges just as serious as any physical safety issue.</p>
-
-                <p>Sustainability also hits close to home. Every product or system we design leaves a footprint, and as engineers, we have to be intentional about reducing harm. That might mean using renewable energy, designing more efficient hardware, or developing algorithms that reduce energy use. The idea is to build things that last, not just physically, but in a way that doesn't damage the world we're building them for. I think the next generation of engineers, myself included, has a real duty to prioritize that.</p>
-
-                <h3>Personal Reflection</h3>
-                <p>Before this course, I used to think of ethics as kind of a checklist, like something you review at the end to make sure you didn't mess up. Now I see it as something that should be built into the process from the start. It's part of the design, not an afterthought. Ethics shows up in the small decisions, how you test something, how you report data, how honest you are when things don't go as planned. Those moments define your integrity as an engineer.</p>
-
-                <p>I've also realized that being a responsible engineer means staying aware of how your work connects to the bigger picture. It's easy to get caught up in solving a single problem, but ethics reminds you to zoom out, to think about who's affected and what kind of world you're contributing to. That's the mindset I want to bring into my career: doing great technical work, but never losing sight of the human and ethical side behind it.</p>
-
-                <h3>Conclusion</h3>
-                <p>At the end of the day, ethics in engineering comes down to one word: trust. People trust engineers to create safe, fair, and sustainable solutions. To earn that trust, we have to make decisions guided not just by data, but by values. This course taught me that being an ethical engineer means asking the tough questions, taking responsibility for your work, and speaking up when something isn't right. It's about building things that make life better, not just for now, but for the future too. That's the kind of engineer I want to be.</p>
+            <div class="cert-card fade-in">
+                <h3 class="cert-company">PwC</h3>
+                <p style="color: var(--gray); margin-bottom: 1rem;">PricewaterhouseCoopers</p>
+                <ul class="cert-list">
+                    <li>✓ Technology Consulting</li>
+                    <li>✓ Digital Assurance & Transparency</li>
+                </ul>
             </div>
-        </section>
+            
+            <div class="cert-card fade-in">
+                <h3 class="cert-company">Deloitte</h3>
+                <p style="color: var(--gray); margin-bottom: 1rem;">Deloitte Consulting</p>
+                <ul class="cert-list">
+                    <li>✓ Technology Consulting</li>
+                </ul>
+            </div>
+            
+            <div class="cert-card fade-in">
+                <h3 class="cert-company">Accenture</h3>
+                <p style="color: var(--gray); margin-bottom: 1rem;">Accenture Consulting</p>
+                <ul class="cert-list">
+                    <li>✓ Technology Consulting</li>
+                </ul>
+            </div>
+        </div>
+    </section>
 
-        <!-- Resume Section -->
-        <section id="resume" class="section">
-            <h2>Resume</h2>
-            <p>View my complete professional resume with detailed information about my education, experience, and qualifications.</p>
-            <a href="Ethan Pairitz - Resume.pdf" class="resume-button" target="_blank">Download Resume (PDF)</a>
-        </section>
-    </main>
+    <!-- Experience Section -->
+    <section id="experience" class="section">
+        <h2>Professional <span>Experience</span></h2>
+        
+        <div class="card fade-in">
+            <h3>IT Assistant</h3>
+            <p class="meta" style="color: var(--gray); margin-bottom: 1rem;">Global Link IT Department | June 2022 - Present</p>
+            <p>Supporting IT operations in a professional environment, gaining valuable experience in technical problem-solving and enterprise systems management.</p>
+            <ul style="margin-top: 1rem; padding-left: 1.5rem;">
+                <li>Troubleshoot hardware and software issues across multiple platforms</li>
+                <li>Assist with system maintenance, updates, and security protocols</li>
+                <li>Provide technical support and training to staff members</li>
+                <li>Document solutions and create user guides for common issues</li>
+            </ul>
+            <p style="margin-top: 1rem;"><strong>Skills Developed:</strong> Enterprise IT systems, cross-platform troubleshooting, technical documentation, professional communication, project management</p>
+        </div>
+    </section>
+
+    <!-- Mission & Values Section -->
+    <section id="mission" class="section">
+        <h2>Mission & <span>Values</span></h2>
+        
+        <div class="card fade-in">
+            <h3 style="color: var(--primary); margin-bottom: 1.5rem;">Why Technology Consulting</h3>
+            <p>Engineering is deeply human. Every decision we make as technologists affects communities, environments, and future generations. This understanding drives my passion for technology consulting - it's where technical innovation meets human impact, and where doing the job right means more than just delivering solutions.</p>
+
+            <p>In consulting, I see the opportunity to bridge the gap between what's technically possible and what's ethically acceptable. Technology should serve people, not the other way around. My mission is to help organizations implement solutions that are not only efficient and innovative but also responsible and sustainable.</p>
+
+            <h3 style="color: var(--primary); margin-top: 2rem;">Core Values That Guide My Work</h3>
+            
+            <div style="margin: 1.5rem 0; padding: 1.5rem; background: var(--light-gray); border-radius: 10px;">
+                <h4 style="color: var(--primary); margin-bottom: 1rem;">Responsibility & Trust</h4>
+                <p>People rely on technologists to design systems that are safe, fair, and sustainable. This trust is earned through consistent integrity and transparency. Every recommendation I make considers not just immediate business needs, but long-term impacts on all stakeholders.</p>
+            </div>
+
+            <div style="margin: 1.5rem 0; padding: 1.5rem; background: var(--light-gray); border-radius: 10px;">
+                <h4 style="color: var(--primary); margin-bottom: 1rem;">Balanced Decision-Making</h4>
+                <p>Real-world consulting involves complex trade-offs between cost, safety, environmental impact, and social outcomes. I believe in looking beyond the technical specifications to ask critical questions: Who does this impact? Who benefits? What are the unintended consequences? True value comes from finding solutions that balance business objectives with human and environmental protection.</p>
+            </div>
+
+            <div style="margin: 1.5rem 0; padding: 1.5rem; background: var(--light-gray); border-radius: 10px;">
+                <h4 style="color: var(--primary); margin-bottom: 1rem;">Courage to Lead</h4>
+                <p>The Challenger disaster taught us that knowing what's right isn't enough - you need the courage to act on it. In consulting, this means being willing to deliver difficult truths, challenge assumptions, and advocate for ethical solutions even when they're not the easiest path. Leadership sometimes means standing alone for what's right.</p>
+            </div>
+
+            <h3 style="color: var(--primary); margin-top: 2rem;">Technology's Ethical Frontier</h3>
+            <p>As we enter an era dominated by AI and data-driven systems, the ethical stakes have never been higher. Questions of algorithmic bias, privacy, and accountability aren't just technical challenges - they're fundamental to building trust in technology. My approach to consulting addresses these concerns head-on:</p>
+
+            <ul style="margin: 1rem 0; padding-left: 2rem;">
+                <li><strong>AI Ethics:</strong> Ensuring systems treat people fairly and transparently</li>
+                <li><strong>Sustainability:</strong> Designing solutions that reduce environmental impact</li>
+                <li><strong>Accessibility:</strong> Building technology that serves everyone, not just the few</li>
+                <li><strong>Long-term Thinking:</strong> Considering the lasting effects of today's decisions</li>
+            </ul>
+
+            <h3 style="color: var(--primary); margin-top: 2rem;">My Commitment</h3>
+            <p>Ethics isn't a checklist to review at project completion - it's integrated into every phase of the consulting process. From initial stakeholder meetings to final implementation, I believe in maintaining awareness of how our work connects to the bigger picture.</p>
+
+            <p>My goal is to be a consultant who delivers exceptional technical solutions while never losing sight of the human element. By combining strategic thinking with ethical responsibility, I aim to help organizations build technology that makes life better - not just for now, but for the future.</p>
+
+            <p style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); color: white; border-radius: 10px; text-align: center; font-weight: 600;">
+                "Trust is the glue of life. It's the most essential ingredient in effective communication. It's the foundational principle that holds all relationships."<br>
+                <span style="font-weight: 400; font-size: 0.9rem;">- Stephen Covey</span>
+            </p>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2025 Ethan Pairitz. All rights reserved. | Built with passion for engineering.</p>
+        <p>&copy; 2025 Ethan Pairitz | Indiana University | Built with passion for technology & innovation</p>
+        <div style="margin-top: 1rem;">
+            <a href="mailto:ethan.op@icloud.com" style="color: white; margin: 0 1rem;">Email</a>
+            <a href="https://github.com/ethndotcom/I-clicked-some-keys" target="_blank" style="color: white; margin: 0 1rem;">GitHub</a>
+        </div>
     </footer>
 
     <script>
@@ -580,7 +739,7 @@
             navLinks.classList.toggle('active');
         }
 
-        // Smooth scrolling for navigation links
+        // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -590,13 +749,12 @@
                         behavior: 'smooth',
                         block: 'start'
                     });
-                    // Close mobile menu if open
                     document.getElementById('navLinks').classList.remove('active');
                 }
             });
         });
 
-        // Add fade-in animation on scroll
+        // Scroll animations
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -100px 0px'
@@ -605,24 +763,30 @@
         const observer = new IntersectionObserver(function(entries) {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+                    entry.target.classList.add('fade-in');
                 }
             });
         }, observerOptions);
 
-        // Observe all fade-in elements
         document.addEventListener('DOMContentLoaded', () => {
             const fadeElements = document.querySelectorAll('.fade-in');
-            fadeElements.forEach(el => {
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(20px)';
-                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                observer.observe(el);
-            });
+            fadeElements.forEach(el => observer.observe(el));
+        });
+
+        // Navbar scroll effect
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll <= 0) {
+                nav.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                nav.style.boxShadow = '0 2px 30px rgba(0, 0, 0, 0.15)';
+            }
+            
+            lastScroll = currentScroll;
         });
     </script>
 </body>
 </html>
-
-
