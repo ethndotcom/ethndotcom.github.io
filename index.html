@@ -12,23 +12,27 @@
         }
 
         :root {
-            --primary: #6366f1;
-            --primary-dark: #4f46e5;
-            --secondary: #8b5cf6;
-            --accent: #ec4899;
-            --dark: #0f172a;
-            --gray: #64748b;
-            --light-gray: #e2e8f0;
-            --white: #ffffff;
-            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --primary: #818cf8;
+            --primary-dark: #6366f1;
+            --secondary: #a78bfa;
+            --accent: #f472b6;
+            --dark: #0f0f10;
+            --dark-bg: #18181b;
+            --dark-card: #27272a;
+            --dark-border: #3f3f46;
+            --gray: #a1a1aa;
+            --light-gray: #52525b;
+            --white: #fafafa;
+            --gradient: linear-gradient(135deg, #818cf8 0%, #a78bfa 100%);
+            --glow: 0 0 50px rgba(129, 140, 248, 0.3);
+            --card-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
         }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
             line-height: 1.6;
-            color: var(--dark);
-            background: var(--white);
+            color: var(--white);
+            background: var(--dark);
             overflow-x: hidden;
         }
 
@@ -39,21 +43,48 @@
             left: 0;
             width: 100%;
             height: 100%;
+            z-index: -2;
+            background: var(--dark);
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 20% 80%, var(--primary-dark) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, var(--secondary) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 40%, var(--accent) 0%, transparent 50%);
+            opacity: 0.1;
+            animation: rotate 30s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Grid Pattern */
+        .grid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             z-index: -1;
-            background: linear-gradient(45deg, #f3f4f6 25%, transparent 25%), 
-                        linear-gradient(-45deg, #f3f4f6 25%, transparent 25%), 
-                        linear-gradient(45deg, transparent 75%, #f3f4f6 75%), 
-                        linear-gradient(-45deg, transparent 75%, #f3f4f6 75%);
+            background-image: 
+                linear-gradient(rgba(129, 140, 248, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(129, 140, 248, 0.03) 1px, transparent 1px);
             background-size: 50px 50px;
-            background-position: 0 0, 0 25px, 25px -25px, -25px 0px;
-            opacity: 0.03;
         }
 
         /* Navigation */
         nav {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            background: rgba(24, 24, 27, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--dark-border);
             position: fixed;
             width: 100%;
             top: 0;
@@ -77,6 +108,11 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-brand:hover {
+            transform: scale(1.05);
         }
 
         .nav-links {
@@ -86,7 +122,7 @@
         }
 
         .nav-links a {
-            color: var(--dark);
+            color: var(--gray);
             text-decoration: none;
             font-weight: 500;
             position: relative;
@@ -100,12 +136,12 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: var(--primary);
+            background: var(--gradient);
             transition: width 0.3s ease;
         }
 
         .nav-links a:hover {
-            color: var(--primary);
+            color: var(--white);
         }
 
         .nav-links a:hover::after {
@@ -125,7 +161,7 @@
             display: block;
             width: 25px;
             height: 3px;
-            background: var(--dark);
+            background: var(--white);
             margin: 5px 0;
             transition: 0.3s;
             border-radius: 3px;
@@ -138,26 +174,27 @@
             align-items: center;
             justify-content: center;
             position: relative;
-            background: var(--white);
+            background: var(--dark);
             overflow: hidden;
         }
 
         .hero::before {
             content: '';
             position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 500px;
+            height: 500px;
             background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
-            opacity: 0.05;
-            animation: float 20s ease-in-out infinite;
+            opacity: 0.1;
+            filter: blur(100px);
+            animation: pulse 4s ease-in-out infinite;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            33% { transform: translate(-100px, -100px) rotate(120deg); }
-            66% { transform: translate(100px, -100px) rotate(240deg); }
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.1); }
         }
 
         .hero-content {
@@ -175,6 +212,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: fadeInUp 0.8s ease;
+            filter: drop-shadow(0 0 30px rgba(129, 140, 248, 0.5));
         }
 
         .hero .tagline {
@@ -206,28 +244,32 @@
             font-weight: 600;
             transition: all 0.3s ease;
             display: inline-block;
+            position: relative;
+            overflow: hidden;
         }
 
         .btn-primary {
             background: var(--gradient);
             color: white;
-            box-shadow: 0 5px 20px rgba(99, 102, 241, 0.3);
+            box-shadow: 0 5px 20px rgba(129, 140, 248, 0.4);
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.4);
+            box-shadow: 0 8px 30px rgba(129, 140, 248, 0.6);
         }
 
         .btn-outline {
             border: 2px solid var(--primary);
             color: var(--primary);
+            background: transparent;
         }
 
         .btn-outline:hover {
-            background: var(--primary);
+            background: var(--gradient);
             color: white;
             transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(129, 140, 248, 0.4);
         }
 
         /* Sections */
@@ -235,6 +277,7 @@
             padding: 5rem 2rem;
             max-width: 1200px;
             margin: 0 auto;
+            position: relative;
         }
 
         h2 {
@@ -253,7 +296,8 @@
 
         /* Cards */
         .card {
-            background: white;
+            background: var(--dark-bg);
+            border: 1px solid var(--dark-border);
             border-radius: 20px;
             padding: 2.5rem;
             margin-bottom: 2rem;
@@ -268,7 +312,7 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 5px;
+            width: 100%;
             height: 100%;
             background: var(--gradient);
             opacity: 0;
@@ -277,11 +321,12 @@
 
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(129, 140, 248, 0.2);
         }
 
         .card:hover::before {
-            opacity: 1;
+            opacity: 0.03;
         }
 
         /* Skills Grid */
@@ -292,29 +337,56 @@
         }
 
         .skill-card {
-            background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
+            background: var(--dark-card);
+            border: 1px solid var(--dark-border);
             border-radius: 15px;
             padding: 2rem;
             text-align: center;
             transition: all 0.3s ease;
-            border: 1px solid var(--light-gray);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: var(--gradient);
+            border-radius: 15px;
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.3s ease;
         }
 
         .skill-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            border-color: var(--primary);
+        }
+
+        .skill-card:hover::after {
+            opacity: 1;
         }
 
         .skill-icon {
             font-size: 3rem;
             margin-bottom: 1rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .skill-card h4 {
-            color: var(--primary);
+            color: var(--white);
             margin-bottom: 1rem;
             font-size: 1.3rem;
+        }
+
+        .skill-card p {
+            color: var(--gray);
+            font-size: 0.9rem;
+            line-height: 1.5;
         }
 
         /* Certifications */
@@ -326,8 +398,8 @@
         }
 
         .cert-card {
-            background: white;
-            border: 2px solid var(--light-gray);
+            background: var(--dark-card);
+            border: 2px solid var(--dark-border);
             border-radius: 15px;
             padding: 2rem;
             text-align: center;
@@ -344,7 +416,7 @@
             width: 200%;
             height: 200%;
             background: var(--gradient);
-            opacity: 0.1;
+            opacity: 0.05;
             transform: rotate(45deg);
             transition: all 0.5s ease;
         }
@@ -352,18 +424,19 @@
         .cert-card:hover {
             border-color: var(--primary);
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.2);
+            box-shadow: var(--glow);
         }
 
         .cert-card:hover::after {
             top: -75%;
             right: -75%;
+            opacity: 0.1;
         }
 
         .cert-company {
             font-size: 1.5rem;
             font-weight: 700;
-            color: var(--primary);
+            color: var(--white);
             margin-bottom: 0.5rem;
             position: relative;
             z-index: 1;
@@ -402,11 +475,22 @@
 
         /* Footer */
         footer {
-            background: var(--dark);
-            color: white;
+            background: var(--dark-bg);
+            border-top: 1px solid var(--dark-border);
+            color: var(--gray);
             text-align: center;
             padding: 3rem 2rem;
             margin-top: 5rem;
+        }
+
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: var(--white);
         }
 
         /* Animations */
@@ -434,10 +518,10 @@
                 top: 100%;
                 left: 0;
                 width: 100%;
-                background: white;
+                background: var(--dark-bg);
                 flex-direction: column;
                 padding: 2rem;
-                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+                border: 1px solid var(--dark-border);
             }
 
             .nav-links.active {
@@ -457,7 +541,7 @@
                 align-items: center;
             }
 
-            .cert-grid {
+            .cert-grid, .skills-container {
                 grid-template-columns: 1fr;
             }
         }
@@ -473,7 +557,7 @@
         }
 
         ::-webkit-scrollbar-track {
-            background: var(--light-gray);
+            background: var(--dark-bg);
         }
 
         ::-webkit-scrollbar-thumb {
@@ -484,10 +568,45 @@
         ::-webkit-scrollbar-thumb:hover {
             background: var(--primary-dark);
         }
+
+        /* Text colors */
+        p {
+            color: var(--gray);
+        }
+
+        h3 {
+            color: var(--white);
+        }
+
+        .meta {
+            color: var(--light-gray);
+        }
+
+        strong {
+            color: var(--white);
+        }
+
+        ul {
+            color: var(--gray);
+        }
+
+        /* Link styling for projects */
+        .project-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .project-link:hover {
+            color: var(--white);
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
     <div class="bg-animation"></div>
+    <div class="grid-bg"></div>
 
     <!-- Navigation -->
     <nav>
@@ -552,7 +671,8 @@
             </div>
             <p><strong>Challenge:</strong> Students with ADHD/ADD often struggle with traditional time management and study tools that don't account for their unique focus patterns and needs.</p>
             <p><strong>Solution:</strong> Developing a comprehensive iOS application that adapts to individual focus patterns, providing customized study sessions, break reminders, and task management specifically designed for ADHD/ADD users.</p>
-            <p><strong>Technologies:</strong> Swift, SwiftUI, Core Data</p>
+            <p><strong>Technologies:</strong> Swift, SwiftUI, Core Data, Apple HealthKit integration</p>
+            <p><strong>Status:</strong> Currently in development as part of the Apple Developer Program, with beta testing planned for early 2025.</p>
         </div>
 
         <div class="card fade-in">
@@ -566,7 +686,7 @@
             <p><strong>Challenge:</strong> Many beginners struggle with learning programming syntax and concepts in traditional environments.</p>
             <p><strong>Solution:</strong> Developed three language-specific games (C-Be-Good, Python-Be-Good, Java-Be-Good) inspired by vim-be-good. Each game teaches syntax and programming concepts through interactive challenges.</p>
             <p><strong>Impact:</strong> Tested with diverse users from experienced programmers to complete beginners, receiving positive feedback on engagement and learning outcomes.</p>
-            <p><a href="https://github.com/ethndotcom/I-clicked-some-keys/tree/main/games" target="_blank" style="color: var(--primary); font-weight: 600;">View on GitHub →</a></p>
+            <p><a href="https://github.com/ethndotcom/I-clicked-some-keys/tree/main/games" target="_blank" class="project-link">View on GitHub →</a></p>
         </div>
     </section>
 
@@ -577,38 +697,38 @@
         <div class="skills-container fade-in">
             <div class="skill-card">
                 <div class="skill-icon">💻</div>
-                <h4>Programming Languages</h4>
-                <p>Python • Java • C • HTML/CSS • Swift</p>
-            </div>
-            
-            <div class="skill-card">
-                <div class="skill-icon">🛠️</div>
-                <h4>Development Tools</h4>
-                <p>VS Code • Vim/Terminal • Git/GitHub • Xcode</p>
-            </div>
-            
-            <div class="skill-card">
-                <div class="skill-icon">🖥️</div>
-                <h4>Operating Systems</h4>
-                <p>macOS • Windows • Linux/Unix</p>
+                <h4>Programming & Development</h4>
+                <p>Python • Java • C • HTML/CSS • Swift<br>VS Code • Vim/Terminal • Git/GitHub • Xcode</p>
             </div>
             
             <div class="skill-card">
                 <div class="skill-icon">📊</div>
-                <h4>Business Tools</h4>
-                <p>Microsoft Office Suite • Google Workspace • Data Analysis</p>
-            </div>
-            
-            <div class="skill-card">
-                <div class="skill-icon">🤝</div>
-                <h4>Soft Skills</h4>
-                <p>Project Management • Team Leadership • Strategic Communication</p>
+                <h4>Data & Analytics</h4>
+                <p>Data Analysis • Financial Modeling • Business Metrics<br>Pattern Recognition • Data Literacy • Market Research</p>
             </div>
             
             <div class="skill-card">
                 <div class="skill-icon">🎯</div>
-                <h4>Specializations</h4>
-                <p>Technology Consulting • Digital Strategy • Systems Design</p>
+                <h4>Strategy & Consulting</h4>
+                <p>Strategic Planning • Business Analysis • Impact Forecasting<br>Competitive Review • Stakeholder Management</p>
+            </div>
+            
+            <div class="skill-card">
+                <div class="skill-icon">📈</div>
+                <h4>Business Tools</h4>
+                <p>Microsoft Excel • PowerPoint • SDLC<br>Financial Reporting • Presentation Development</p>
+            </div>
+            
+            <div class="skill-card">
+                <div class="skill-icon">🚀</div>
+                <h4>Project Management</h4>
+                <p>Agile Methodology • Project Planning • Prioritization<br>Stakeholder Analysis • Risk Management</p>
+            </div>
+            
+            <div class="skill-card">
+                <div class="skill-icon">💬</div>
+                <h4>Communication</h4>
+                <p>Client Communication • Strategic Communication<br>Technical Writing • Team Collaboration</p>
             </div>
         </div>
     </section>
@@ -625,6 +745,7 @@
                     <li>✓ Introduction to Strategy Consulting</li>
                     <li>✓ Strategy Consulting</li>
                     <li>✓ Social Impact</li>
+                    <li>✓ Digital Transformation Program</li>
                 </ul>
             </div>
             
@@ -634,14 +755,6 @@
                 <ul class="cert-list">
                     <li>✓ Technology Consulting</li>
                     <li>✓ Digital Assurance & Transparency</li>
-                </ul>
-            </div>
-            
-            <div class="cert-card fade-in">
-                <h3 class="cert-company">Deloitte</h3>
-                <p style="color: var(--gray); margin-bottom: 1rem;">Deloitte Consulting</p>
-                <ul class="cert-list">
-                    <li>✓ Technology</li>
                 </ul>
             </div>
             
@@ -661,12 +774,12 @@
         
         <div class="card fade-in">
             <h3>IT Assistant</h3>
-            <p class="meta" style="color: var(--gray); margin-bottom: 1rem;">Global Link IT Department | June 2022 - Present</p>
+            <p class="meta" style="margin-bottom: 1rem;">Global Link IT Department | June 2022 - Present</p>
             <p>Supporting IT operations in a professional environment, gaining valuable experience in technical problem-solving and enterprise systems management.</p>
-            <ul style="margin-top: 1rem; padding-left: 1.5rem;">
+            <ul style="margin-top: 1rem; padding-left: 1.5rem; color: var(--gray);">
                 <li>Troubleshoot hardware and software issues across multiple platforms</li>
                 <li>Assist with system maintenance, updates, and security protocols</li>
-                <li>Provide technical support</li>
+                <li>Provide technical support and training to staff members</li>
                 <li>Document solutions and create user guides for common issues</li>
             </ul>
             <p style="margin-top: 1rem;"><strong>Skills Developed:</strong> Enterprise IT systems, cross-platform troubleshooting, technical documentation, professional communication, project management</p>
@@ -678,29 +791,29 @@
         <h2>Mission & <span>Values</span></h2>
         
         <div class="card fade-in">
-            <h3 style="color: var(--primary); margin-bottom: 1.5rem;">Why Technology Consulting</h3>
+            <h3 style="margin-bottom: 1.5rem;">Why Technology Consulting</h3>
             <p>Engineering is deeply human. Every decision we make as technologists affects communities, environments, and future generations. This understanding drives my passion for technology consulting - it's where technical innovation meets human impact, and where doing the job right means more than just delivering solutions.</p>
 
             <p>In consulting, I see the opportunity to bridge the gap between what's technically possible and what's ethically acceptable. Technology should serve people, not the other way around. My mission is to help organizations implement solutions that are not only efficient and innovative but also responsible and sustainable.</p>
 
-            <h3 style="color: var(--primary); margin-top: 2rem;">Core Values That Guide My Work</h3>
+            <h3 style="margin-top: 2rem;">Core Values That Guide My Work</h3>
             
-            <div style="margin: 1.5rem 0; padding: 1.5rem; background: var(--light-gray); border-radius: 10px;">
-                <h4 style="color: var(--primary); margin-bottom: 1rem;">Responsibility & Trust</h4>
+            <div style="margin: 1.5rem 0; padding: 1.5rem; background: var(--dark-card); border: 1px solid var(--dark-border); border-radius: 10px;">
+                <h4 style="margin-bottom: 1rem;">Responsibility & Trust</h4>
                 <p>People rely on technologists to design systems that are safe, fair, and sustainable. This trust is earned through consistent integrity and transparency. Every recommendation I make considers not just immediate business needs, but long-term impacts on all stakeholders.</p>
             </div>
 
-            <div style="margin: 1.5rem 0; padding: 1.5rem; background: var(--light-gray); border-radius: 10px;">
-                <h4 style="color: var(--primary); margin-bottom: 1rem;">Balanced Decision-Making</h4>
+            <div style="margin: 1.5rem 0; padding: 1.5rem; background: var(--dark-card); border: 1px solid var(--dark-border); border-radius: 10px;">
+                <h4 style="margin-bottom: 1rem;">Balanced Decision-Making</h4>
                 <p>Real-world consulting involves complex trade-offs between cost, safety, environmental impact, and social outcomes. I believe in looking beyond the technical specifications to ask critical questions: Who does this impact? Who benefits? What are the unintended consequences? True value comes from finding solutions that balance business objectives with human and environmental protection.</p>
             </div>
 
-            <div style="margin: 1.5rem 0; padding: 1.5rem; background: var(--light-gray); border-radius: 10px;">
-                <h4 style="color: var(--primary); margin-bottom: 1rem;">Courage to Lead</h4>
+            <div style="margin: 1.5rem 0; padding: 1.5rem; background: var(--dark-card); border: 1px solid var(--dark-border); border-radius: 10px;">
+                <h4 style="margin-bottom: 1rem;">Courage to Lead</h4>
                 <p>The Challenger disaster taught us that knowing what's right isn't enough - you need the courage to act on it. In consulting, this means being willing to deliver difficult truths, challenge assumptions, and advocate for ethical solutions even when they're not the easiest path. Leadership sometimes means standing alone for what's right.</p>
             </div>
 
-            <h3 style="color: var(--primary); margin-top: 2rem;">Technology's Ethical Frontier</h3>
+            <h3 style="margin-top: 2rem;">Technology's Ethical Frontier</h3>
             <p>As we enter an era dominated by AI and data-driven systems, the ethical stakes have never been higher. Questions of algorithmic bias, privacy, and accountability aren't just technical challenges - they're fundamental to building trust in technology. My approach to consulting addresses these concerns head-on:</p>
 
             <ul style="margin: 1rem 0; padding-left: 2rem;">
@@ -710,12 +823,12 @@
                 <li><strong>Long-term Thinking:</strong> Considering the lasting effects of today's decisions</li>
             </ul>
 
-            <h3 style="color: var(--primary); margin-top: 2rem;">My Commitment</h3>
+            <h3 style="margin-top: 2rem;">My Commitment</h3>
             <p>Ethics isn't a checklist to review at project completion - it's integrated into every phase of the consulting process. From initial stakeholder meetings to final implementation, I believe in maintaining awareness of how our work connects to the bigger picture.</p>
 
             <p>My goal is to be a consultant who delivers exceptional technical solutions while never losing sight of the human element. By combining strategic thinking with ethical responsibility, I aim to help organizations build technology that makes life better - not just for now, but for the future.</p>
 
-            <p style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); color: white; border-radius: 10px; text-align: center; font-weight: 600;">
+            <p style="margin-top: 2rem; padding: 1.5rem; background: var(--gradient); color: white; border-radius: 10px; text-align: center; font-weight: 600;">
                 "Trust is the glue of life. It's the most essential ingredient in effective communication. It's the foundational principle that holds all relationships."<br>
                 <span style="font-weight: 400; font-size: 0.9rem;">- Stephen Covey</span>
             </p>
@@ -726,8 +839,8 @@
     <footer>
         <p>&copy; 2025 Ethan Pairitz | Indiana University | Built with passion for technology & innovation</p>
         <div style="margin-top: 1rem;">
-            <a href="mailto:ethan.op@icloud.com" style="color: white; margin: 0 1rem;">Email</a>
-            <a href="https://github.com/ethndotcom/I-clicked-some-keys" target="_blank" style="color: white; margin: 0 1rem;">GitHub</a>
+            <a href="mailto:ethan.op@icloud.com">Email</a> • 
+            <a href="https://github.com/ethndotcom/I-clicked-some-keys" target="_blank">GitHub</a>
         </div>
     </footer>
 
@@ -779,9 +892,9 @@
             const currentScroll = window.pageYOffset;
             
             if (currentScroll <= 0) {
-                nav.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+                nav.style.borderBottom = '1px solid var(--dark-border)';
             } else {
-                nav.style.boxShadow = '0 2px 30px rgba(0, 0, 0, 0.15)';
+                nav.style.borderBottom = '1px solid var(--primary)';
             }
             
             lastScroll = currentScroll;
@@ -789,6 +902,3 @@
     </script>
 </body>
 </html>
-
-
-
