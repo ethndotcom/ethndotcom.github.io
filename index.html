@@ -127,12 +127,6 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             color: var(--gray);
-            transition: all 0.3s ease;
-        }
-
-        .tag:hover {
-            border-color: var(--accent);
-            color: var(--accent);
         }
 
         /* Sections */
@@ -190,10 +184,10 @@
         }
 
         .stat-number {
-            font-size: 3rem;
+            font-size: clamp(1.5rem, 4vw, 3rem);
             font-weight: 800;
             color: var(--accent);
-            letter-spacing: -2px;
+            letter-spacing: -1px;
         }
 
         .stat-label {
@@ -501,6 +495,194 @@
             color: var(--light-gray);
         }
 
+        /* Resume Section */
+        .resume-container {
+            max-width: 900px;
+        }
+
+        .resume-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2rem;
+            background: var(--accent);
+            color: var(--black);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 3rem;
+            transition: all 0.3s ease;
+        }
+
+        .resume-download:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+
+        .resume-download svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .resume-section {
+            margin-bottom: 3rem;
+        }
+
+        .resume-section-title {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .resume-summary {
+            color: var(--light-gray);
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .resume-competencies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .competency-tag {
+            padding: 0.5rem 1rem;
+            background: var(--dark-card);
+            border: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.85rem;
+            color: var(--light-gray);
+        }
+
+        .resume-edu {
+            padding: 1.5rem;
+            background: var(--dark-card);
+            border-left: 3px solid var(--accent);
+        }
+
+        .resume-edu-school {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .resume-edu-degree {
+            color: var(--light-gray);
+            font-size: 0.95rem;
+        }
+
+        .resume-edu-date {
+            color: var(--gray);
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+        }
+
+        .resume-job {
+            padding: 1.5rem;
+            background: var(--dark-card);
+            border-left: 3px solid var(--accent);
+            margin-bottom: 1.5rem;
+        }
+
+        .resume-job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .resume-job-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .resume-job-company {
+            color: var(--accent);
+            font-size: 0.95rem;
+        }
+
+        .resume-job-date {
+            color: var(--gray);
+            font-size: 0.85rem;
+        }
+
+        .resume-job-duties {
+            list-style: none;
+        }
+
+        .resume-job-duties li {
+            color: var(--light-gray);
+            font-size: 0.95rem;
+            padding: 0.4rem 0;
+            padding-left: 1.25rem;
+            position: relative;
+        }
+
+        .resume-job-duties li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        .resume-project {
+            padding: 1.5rem;
+            background: var(--dark-card);
+            border-left: 3px solid var(--accent);
+            margin-bottom: 1.5rem;
+        }
+
+        .resume-project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .resume-project-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .resume-project-tech {
+            color: var(--accent);
+            font-size: 0.85rem;
+        }
+
+        .resume-project-date {
+            color: var(--gray);
+            font-size: 0.85rem;
+        }
+
+        .resume-project-details {
+            list-style: none;
+        }
+
+        .resume-project-details li {
+            color: var(--light-gray);
+            font-size: 0.95rem;
+            padding: 0.4rem 0;
+            padding-left: 1.25rem;
+            position: relative;
+        }
+
+        .resume-project-details li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
         /* Contact */
         .contact-content {
             display: flex;
@@ -644,6 +826,7 @@
             <li><a href="#projects">Projects</a></li>
             <li><a href="#certifications">Certifications</a></li>
             <li><a href="#skills">Skills</a></li>
+            <li><a href="#resume">Resume</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
     </nav>
@@ -975,10 +1158,26 @@
         </div>
     </section>
 
+    <!-- Resume -->
+    <section id="resume">
+        <div class="section-header">
+            <p class="section-label">06 — Resume</p>
+            <h2 class="section-title">Resume</h2>
+        </div>
+        <div class="resume-container">
+            <a href="data:application/pdf;base64,JVBERi0xLjQKJZOMi54gUmVwb3J0TGFiIEdlbmVyYXRlZCBQREYgZG9jdW1lbnQgaHR0cDovL3d3dy5yZXBvcnRsYWIuY29tCjEgMCBvYmoKPDwKL0YxIDIgMCBSIC9GMiAzIDAgUiAvRjMgNCAwIFIKPj4KZW5kb2JqCjIgMCBvYmoKPDwKL0Jhc2VGb250IC9IZWx2ZXRpY2EgL0VuY29kaW5nIC9XaW5BbnNpRW5jb2RpbmcgL05hbWUgL0YxIC9TdWJ0eXBlIC9UeXBlMSAvVHlwZSAvRm9udAo+PgplbmRvYmoKMyAwIG9iago8PAovQmFzZUZvbnQgL0hlbHZldGljYS1Cb2xkIC9FbmNvZGluZyAvV2luQW5zaUVuY29kaW5nIC9OYW1lIC9GMiAvU3VidHlwZSAvVHlwZTEgL1R5cGUgL0ZvbnQKPj4KZW5kb2JqCjQgMCBvYmoKPDwKL0Jhc2VGb250IC9IZWx2ZXRpY2EtT2JsaXF1ZSAvRW5jb2RpbmcgL1dpbkFuc2lFbmNvZGluZyAvTmFtZSAvRjMgL1N1YnR5cGUgL1R5cGUxIC9UeXBlIC9Gb250Cj4+CmVuZG9iago1IDAgb2JqCjw8Ci9Db250ZW50cyA5IDAgUiAvTWVkaWFCb3ggWyAwIDAgNjEyIDc5MiBdIC9QYXJlbnQgOCAwIFIgL1Jlc291cmNlcyA8PAovRm9udCAxIDAgUiAvUHJvY1NldCBbIC9QREYgL1RleHQgL0ltYWdlQiAvSW1hZ2VDIC9JbWFnZUkgXQo+PiAvUm90YXRlIDAgL1RyYW5zIDw8Cgo+PiAKICAvVHlwZSAvUGFnZQo+PgplbmRvYmoKNiAwIG9iago8PAovUGFnZU1vZGUgL1VzZU5vbmUgL1BhZ2VzIDggMCBSIC9UeXBlIC9DYXRhbG9nCj4+CmVuZG9iago3IDAgb2JqCjw8Ci9BdXRob3IgKFwoYW5vbnltb3VzXCkpIC9DcmVhdGlvbkRhdGUgKEQ6MjAyNTEyMDIxOTI4MjQrMDAnMDAnKSAvQ3JlYXRvciAoXCh1bnNwZWNpZmllZFwpKSAvS2V5d29yZHMgKCkgL01vZERhdGUgKEQ6MjAyNTEyMDIxOTI4MjQrMDAnMDAnKSAvUHJvZHVjZXIgKFJlcG9ydExhYiBQREYgTGlicmFyeSAtIHd3dy5yZXBvcnRsYWIuY29tKSAKICAvU3ViamVjdCAoXCh1bnNwZWNpZmllZFwpKSAvVGl0bGUgKFwoYW5vbnltb3VzXCkpIC9UcmFwcGVkIC9GYWxzZQo+PgplbmRvYmoKOCAwIG9iago8PAovQ291bnQgMSAvS2lkcyBbIDUgMCBSIF0gL1R5cGUgL1BhZ2VzCj4+CmVuZG9iago5IDAgb2JqCjw8Ci9GaWx0ZXIgWyAvQVNDSUk4NURlY29kZSAvRmxhdGVEZWNvZGUgXSAvTGVuZ3RoIDE5MzAKPj4Kc3RyZWFtCkdhdFU0PkJBTFomOlZzL2ZMTDdCMzghQklWXDNySGcvJzJAayQwNWRfQTY3T1tjQVtWVGxnLmtjViE+Y1BpLjkpJ0M6akBwPSE/XnJBSFBqbjcuc1YwRW5ycmk5SjtkZ09XYDVHMTExbUUhS11nbl9dJjZIKmMyMSo5YW48SGxaOS1BbFVIOm47JF5UWUtKZywuO24zc2gpLS0zSDVqS05bRzZMYypeaWlySnJmamAwXlhwNVVZcWJnJkd1cFArKXEmOipPUFxZNUw0MS5jNy5MY0MiZTx1aEpzLGNGaC9PMCYlLEg5cT0ibCFmPWJ1WCo+YS8rPEFFSHVhP0hnXiZPZzVhLDFXXzNAP1JUMysnO3QhVyRwUWBPXGtpKj11JGcvRixQa3FvS3NrRE9nZlpiXiNuW09mJTw/bjlrVFkvY2hCcW4wRSIhJW4mT0pmbS1oKCRRY3VzP1gjLExdJ2dEUSZZcktBL2k4dUE/UUwuam1dTSQlKVxqc3MjbWRVQTJjNE45JjxYMGthSyVfVyc5U3MidUYhYGs8SkZFaDZIbSojbSdGVCEnPD1yKjJAImhuaXFFOlU6OycmVkMqLHE9ZzlYOjE/XmliJDNuQFQ2Z0wsITxhbVxRXi1qcEI6QitWYHRbXSVLMV4kYWgxQURFWklxMEonXWRtUSFGXy4mKWJaJlF0Ikc+OzJeSlltJG5iMkpAN0xNLS1vKDZyUU9LRzZKX1ZSOlFmWUtBL0ZcPStlcHA1N0RPYTY7ZTJnVWNiMEE1aiJlOyYyREI4SzksTUxGJl4hS2Neb1plYm1UaCpnLWgnJUgrPUowPzZeUnFRSmg7V0JzITlmM2teRicqKTM2RkFFTF45MTdpZkNwTFEmTHIkajQ4YyhTMiwsWUdbayxfS2pcWz5OQEk1Tio5JCxeOjNiVD4raENWNj03cG5HQU85cWlBU2dtVjpcV0dXVE4yJ0tROTFxXT0vZz0rWF9gJSsyYUxrJS0rNUIxLDNNOlRqVi4jdV81J1ZOaidLYzRzJl45R2pXUC1UWEozJl06WzVQKGJTYSNqOjw9ZjEhdEUtOUxpU2ciLzctRUdgM1dMWXRgYlNHJTYvajFbXltoWEghQCYhLmtfcDI1KjNiUjFJUUElVGRiUzZOa1huNFlzUjdtSmlmJkwzZ100X0tnVGsiTW85JygxVyo+KFtva10rWWE2NlsjRUc1YnFQZjA1Y2goZENtVTVgbjtFXTdCIUckYGFmTlJfcygzbGdNTlJjUTssODlUOzpHUmpdZS9uJVM5PCspQWhzLS9oMzs4Q29KO1I5VG87a2BtJ0ZyXVZuKU9JSjAxV3AxRC8pQWxRZGFVNm8vLmosS2FOcDcsMWhyYFxAaVgpPi5TZVFYVDEkbScwKVdYblJUKXBDQUZXNGMiX29raHNVJXNDIV5nYTlKJ2Y3S1BjKD1Fck9PZy4vQCpYTFNNRWw8anJJZnNQa21pJE9QcCJeNVZIIVgkOSkmNUVrTkU2NTxvcTozWzt1dHBhTz85JVpJbmpVSl8+QSQ1YnNwPlddSUY7LT0hTEdPRlVtakMzWGRRQEteNFk8UnRzJ29rKVN0TUo8LEY1biJlQ0Y1clk5YjtwP1R1MT1LNE4qKjRYY2VNc09oJkNXP1M+J21KOCpVbnQ8JzJmaSMqUTU5IzQkW21QYjk+QzpiUnQ3YzZCaipYJDZGMyEtXmpCSlZTaGhXMSs1U3RoXV5pNWI5bVcpKG9CNDk5QmQzSlBYdCFrT1ZGXC9sOGwlNmZmQHIyZ01WSjUjLkxJTiIjPyo/JFNuaWM/czBdPkVAUU0+VUI2cG9VX3U/ImpSUjRnPE09NiJuJnA4USZzUygnKFQhSDQscTVXSFNLamlYW0c0SlE7QWJQbGRQNC5DSWIkZztCcFU8XmMxQVZQKC5lZmlWZFVga0xJVipCNyM4T2VhPERZUzEnXkU/UGpUOGAiWTBDI1YyP01ELVo5UHFvSkcwSy8kMWVFY0RzT3U3ZEczLDhdMXQ4VS1KUThLUTpYXyQ+NChpIm9UdT44bXJDSlkmQ1JvTFpSbFIzQjxANi4+XSl1T19nSyQ5L11RPktJZjVrMFZyP09DXTJYbC08PSsyVGtFQCxjNVg+XzcmRikvSVNfaGdASiNDQ0RTZzNYZytmTTxsNDhaSVg9RWVmQnFPVDotX1hqYmEhLV8mN2U1MFNiUGFzXjY9Y1oyOzVAMEUrIjljXHIjJGpfJThjWV1VYlVzayRJI2dOcEc2QGFoVV02P2A9QGctVTosXUVBakslIihtayRcPCJVWyIvL04iS2tgSSxhZitIQkshbkFnXFhPYCkjWmAxNS5dJ2Q6PU1LdCQuIjw0bWBQRCNuSUEwZi5KU28sR1RrMmRrYCouMVVTMVtYQldYVDMoLSl0N11FNydJcU4zSzVFTTVzcFVjTmkvajRONlRLR0JbbC0nTy1jJj5SMUZVR1hNRUxLXlA2ZDtqUTpwcShlbklrI0BVO2hLXnBHJlMuZSciRGpccWo0cWZwOWxuV1FIQmYlM3JbcUczZ2lkWTpyL1dUfj5lbmRzdHJlYW0KZW5kb2JqCnhyZWYKMCAxMAowMDAwMDAwMDAwIDY1NTM1IGYgCjAwMDAwMDAwNzMgMDAwMDAgbiAKMDAwMDAwMDEyNCAwMDAwMCBuIAowMDAwMDAwMjMxIDAwMDAwIG4gCjAwMDAwMDAzNDMgMDAwMDAgbiAKMDAwMDAwMDQ1OCAwMDAwMCBuIAowMDAwMDAwNjUxIDAwMDAwIG4gCjAwMDAwMDA3MTkgMDAwMDAgbiAKMDAwMDAwMTAwMiAwMDAwMCBuIAowMDAwMDAxMDYxIDAwMDAwIG4gCnRyYWlsZXIKPDwKL0lEIApbPDM5ZGQzMGM5ZmUyODZmNWJjY2Y0M2Y4ZmEwZWZjMGY4PjwzOWRkMzBjOWZlMjg2ZjViY2NmNDNmOGZhMGVmYzBmOD5dCiUgUmVwb3J0TGFiIGdlbmVyYXRlZCBQREYgZG9jdW1lbnQgLS0gZGlnZXN0IChodHRwOi8vd3d3LnJlcG9ydGxhYi5jb20pCgovSW5mbyA3IDAgUgovUm9vdCA2IDAgUgovU2l6ZSAxMAo+PgpzdGFydHhyZWYKMzA4MgolJUVPRgo=" download="Ethan-Pairitz-Resume.pdf" class="resume-download">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                Download PDF
+            </a>
+        </div>
+    </section>
+
     <!-- Contact -->
     <section id="contact">
         <div class="section-header">
-            <p class="section-label">06 — Contact</p>
+            <p class="section-label">07 — Contact</p>
             <h2 class="section-title">Let's Connect</h2>
         </div>
         <div class="contact-content">
@@ -1005,5 +1204,3 @@
     </footer>
 </body>
 </html>
-
-
