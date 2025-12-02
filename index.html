@@ -427,6 +427,80 @@
             border-bottom: 1px solid rgba(255,255,255,0.03);
         }
 
+        /* Mission & Values */
+        .mission-content {
+            max-width: 900px;
+        }
+
+        .mission-text {
+            margin-bottom: 3rem;
+        }
+
+        .mission-subtitle {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .mission-text p {
+            color: var(--light-gray);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .values-header {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+
+        .values-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .value-card {
+            padding: 2rem;
+            background: var(--dark-card);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-left: 3px solid var(--accent);
+        }
+
+        .value-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 0.75rem;
+        }
+
+        .value-desc {
+            color: var(--light-gray);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .quote-block {
+            padding: 2.5rem;
+            background: linear-gradient(135deg, var(--accent-dim) 0%, rgba(167, 139, 250, 0.3) 100%);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .quote-text {
+            font-size: 1.15rem;
+            font-style: italic;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .quote-author {
+            font-size: 0.9rem;
+            color: var(--light-gray);
+        }
+
         /* Contact */
         .contact-content {
             display: flex;
@@ -566,6 +640,7 @@
         <div class="nav-logo">EP</div>
         <ul class="nav-links">
             <li><a href="#about">About</a></li>
+            <li><a href="#mission">Mission</a></li>
             <li><a href="#projects">Projects</a></li>
             <li><a href="#certifications">Certifications</a></li>
             <li><a href="#skills">Skills</a></li>
@@ -631,10 +706,58 @@
         </div>
     </section>
 
+    <!-- Mission & Values -->
+    <section id="mission">
+        <div class="section-header">
+            <p class="section-label">02 — Mission</p>
+            <h2 class="section-title">Mission & <span class="accent">Values</span></h2>
+        </div>
+        
+        <div class="mission-content">
+            <div class="mission-text">
+                <h3 class="mission-subtitle">Why Technology Consulting</h3>
+                <p>
+                    Engineering is deeply human. Every decision we make as technologists affects communities, environments, and future generations. This understanding drives my passion for technology consulting — it's where technical innovation meets human impact, and where doing the job right means more than just delivering solutions.
+                </p>
+                <p>
+                    In consulting, I see the opportunity to bridge the gap between what's technically possible and what's ethically acceptable. Technology should serve people, not the other way around. My mission is to help organizations implement solutions that are not only efficient and innovative but also responsible and sustainable.
+                </p>
+            </div>
+
+            <h3 class="values-header">Core Values That Guide My Work</h3>
+            
+            <div class="values-grid">
+                <div class="value-card">
+                    <h4 class="value-title">Responsibility & Trust</h4>
+                    <p class="value-desc">
+                        People rely on technologists to design systems that are safe, fair, and sustainable. This trust is earned through consistent integrity and transparency. Every recommendation I make considers not just immediate business needs, but long-term impacts on all stakeholders.
+                    </p>
+                </div>
+                <div class="value-card">
+                    <h4 class="value-title">Balanced Decision-Making</h4>
+                    <p class="value-desc">
+                        Real-world consulting involves complex trade-offs between cost, safety, environmental impact, and social outcomes. I believe in looking beyond the technical specifications to ask critical questions: Who does this impact? Who benefits? What are the unintended consequences?
+                    </p>
+                </div>
+                <div class="value-card">
+                    <h4 class="value-title">Courage to Lead</h4>
+                    <p class="value-desc">
+                        The Challenger disaster taught us that knowing what's right isn't enough — you need the courage to act on it. In consulting, this means being willing to deliver difficult truths, challenge assumptions, and advocate for ethical solutions even when they're not the easiest path.
+                    </p>
+                </div>
+            </div>
+
+            <div class="quote-block">
+                <p class="quote-text">"Trust is the glue of life. It's the most essential ingredient in effective communication. It's the foundational principle that holds all relationships."</p>
+                <p class="quote-author">— Stephen Covey</p>
+            </div>
+        </div>
+    </section>
+
     <!-- Projects -->
     <section id="projects">
         <div class="section-header">
-            <p class="section-label">02 — Projects</p>
+            <p class="section-label">03 — Projects</p>
             <h2 class="section-title">Selected Work</h2>
         </div>
         <div class="projects-grid">
@@ -721,7 +844,7 @@
     <!-- Certifications -->
     <section id="certifications">
         <div class="section-header">
-            <p class="section-label">03 — Certifications</p>
+            <p class="section-label">04 — Certifications</p>
             <h2 class="section-title">Professional Development</h2>
         </div>
         <div class="certs-grid">
@@ -781,7 +904,7 @@
     <!-- Skills -->
     <section id="skills">
         <div class="section-header">
-            <p class="section-label">04 — Skills</p>
+            <p class="section-label">05 — Skills</p>
             <h2 class="section-title">Technical & Professional</h2>
         </div>
         <div class="skills-container">
@@ -855,7 +978,7 @@
     <!-- Contact -->
     <section id="contact">
         <div class="section-header">
-            <p class="section-label">05 — Contact</p>
+            <p class="section-label">06 — Contact</p>
             <h2 class="section-title">Let's Connect</h2>
         </div>
         <div class="contact-content">
